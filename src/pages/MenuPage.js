@@ -6,18 +6,20 @@ const Menupage = () => {
     const [menuList, setMenuList] = useState([]);
     const [error, setError] = useState(null);
 
+    // 서버에서 데이터를 가져오는 함수
+    const fetchMenuData = async () => {
+        try {
+            const response = await axios.get('https://namewallet.store:6816/menu/select');
+            setMenuList(response.data);
+            console.log("response.data : ", response.data);
+        } catch (err) {
+            setError(err.message);
+            console.error("데이터 가져오는 중 오류 발생:", err);
+        }
+    };
+
     // 컴포넌트가 마운트될 때 데이터 가져오기
     useEffect(() => {
-        const fetchMenuData = async () => {
-            try {
-                const response = await axios.get('https://namewallet.store:6816/menu/select');
-                setMenuList(response.data);
-                console.log("response.data : ", response.data);
-            } catch (err) {
-                setError(err.message);
-                console.error("데이터 가져오는 중 오류 발생:", err);
-            }
-        };
         fetchMenuData();
     }, []);
 
@@ -33,7 +35,7 @@ const Menupage = () => {
                 {menuList.length > 0 ? (
                     menuList.map((menu, index) => (
                         <li key={index}>
-                            <strong>{menu.menuName}</strong>
+                            <strong>{menu.menuName}</strong> - <strong>{menu.menuPrice}</strong>
                         </li>
                     ))
                 ) : (
