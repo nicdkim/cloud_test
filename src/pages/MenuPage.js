@@ -11,6 +11,7 @@ const Menupage = () => {
         try {
             const response = await axios.get('https://namewallet.store:6816/menu/select');
             setMenuList(response.data);
+            console.log("response.data : ", response.data);
         } catch (err) {
             setError(err.message);
             console.error("데이터 가져오는 중 오류 발생:", err);
