@@ -34,7 +34,7 @@ const Menupage = () => {
                 {menuList.length > 0 ? (
                     menuList.map((menu, index) => (
                         <li key={index}>
-                            <strong>{menu.name}</strong>: {menu.description}
+                            <strong>{menu.menuName}</strong>
                         </li>
                     ))
                 ) : (
